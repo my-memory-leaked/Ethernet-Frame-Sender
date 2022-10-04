@@ -1,16 +1,44 @@
-# This is a sample Python script.
+import socket
+import time
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+CONFIG_FILE_PATH = "config.txt"
+MESSAGE_FILE_PATH = "message.txt"
+
+CONFIG_FILE = open(CONFIG_FILE_PATH, mode ="r",
+                    encoding = "utf-8")
+
+MESSAGE_FILE = open(MESSAGE_FILE_PATH, mode ="r",
+                    encoding = "utf-8")
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+UDP_IP = CONFIG_FILE.readline().rstrip("\n")
+UDP_PORT = int( CONFIG_FILE.readline() )
+SERVER_ADDRESS = (UDP_IP , UDP_PORT)
+
+INTERNET_SOCKET = socket.socket( socket.AF_INET,     # Internet
+                                 socket.SOCK_DGRAM ) # UDP
+
+DELAY = int( CONFIG_FILE.readline() )
+MS_DELAY = DELAY/1000
+
+print("UDP target IP: %s" % UDP_IP)
+print("UDP target port: %s" % UDP_PORT)
+print("Sending frame delay in ms: %s" % MS_DELAY)
+
+FRAMES = []
+
+for LINE in MESSAGE_FILE:
+    ELEMENT = LINE[:-1]
+    FRAMES.append( ELEMENT )
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+while True:
+    for FRAME in FRAMES:
+        print(FRAME)
+        INTERNET_SOCKET.sendto( bytes(FRAME, "utf-8"),
+                                SERVER_ADDRESS )
+        time.sleep(MS_DELAY)
+    print("Sending again!!!")
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+CONFIG_FILE.close()
+MESSAGE_FILE.close()
