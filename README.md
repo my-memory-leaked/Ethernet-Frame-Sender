@@ -15,7 +15,6 @@ Please note that the code provided here should be used for testing and education
 
    ```
    git clone ...
-
 2. Navigate to the project directory:
 
    ```shell
@@ -53,6 +52,5 @@ Contributions are welcome! If you find any issues or have suggestions for improv
 ## License
 
 [MIT License](LICENSE)
-```
 
 Feel free to modify and adapt the README as needed to fit your repository structure and requirements.
