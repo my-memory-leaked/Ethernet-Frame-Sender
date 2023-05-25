@@ -1,5 +1,3 @@
-Certainly! Here's a suggested GitHub README for the code you provided:
-
 # UDP Frame Emulator with Memory Leak in Ethernet Stack
 
 This code is a UDP frame emulator implemented in Python. It is designed to send UDP frames repeatedly to a specified IP address and port, allowing you to test the behavior of devices or systems that receive and process UDP frames. Additionally, this emulator intentionally introduces a memory leak in the Ethernet stack to simulate scenarios where memory management becomes critical.
